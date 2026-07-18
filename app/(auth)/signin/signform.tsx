@@ -12,7 +12,7 @@ export const SignInForm = () => {
       className="flex flex-col min-w-full items-center p-6 gap-6 text-black"
     >
       <Input
-        placeholder="School Number / Email"
+        placeholder="School Nō / Email"
         id="username"
         className="border-b-gray-400"
         required

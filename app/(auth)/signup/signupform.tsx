@@ -39,7 +39,7 @@ export const SignUpForm = () => {
       ></Input>
       <Input
         type="password"
-        placeholder="Child's School Number"
+        placeholder="Child's School Nō"
         id="password"
         className="border-b-gray-400"
         required

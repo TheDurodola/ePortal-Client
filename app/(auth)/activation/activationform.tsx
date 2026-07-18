@@ -9,7 +9,7 @@ const ActivationForm = () => {
       className="flex flex-col min-w-full items-center p-6 gap-6 text-black"
     >
       <Input
-        placeholder="Username"
+        placeholder="School Nō"
         id="username"
         className="border-b-gray-400"
         required
