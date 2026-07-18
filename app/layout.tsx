@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Nunito_Sans, Public_Sans } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
-import { Viewport } from "next"
+import { Metadata, Viewport } from "next"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
 const publicSansHeading = Public_Sans({
@@ -18,6 +18,15 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
+
+export const metadata: Metadata = {
+  creator: "Durodola Abolaji Toliat",
+  title: "God's Vision School",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+  },
+}
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -41,8 +50,8 @@ export default function RootLayout({
         publicSansHeading.variable
       )}
     >
-      <body>
-        <ThemeProvider>
+      <body suppressHydrationWarning>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <TooltipProvider>{children}</TooltipProvider>
         </ThemeProvider>
       </body>
