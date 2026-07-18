@@ -24,5 +24,6 @@ export const LoginForm = () => {
         </Link>
       </div>
     </form>
+
   )
 }
