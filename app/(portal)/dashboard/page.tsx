@@ -1,7 +1,12 @@
-import React from 'react'
+import { Button } from "@/components/ui/button"
 
-export const DashboardPage = () => {
+
+export default function DashboardPage() {
   return (
-    <div>DashboardPage</div>
+    <div className="flex min-h-svh p-6">
+      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
+   
+      </div>
+    </div>
   )
 }
