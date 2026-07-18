@@ -1,19 +1,28 @@
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import Image from 'next/image'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import Image from "next/image"
+import logo from '../../../assets/school-logo.webp'
 
-import Link from 'next/link'
-
-
+import Link from "next/link"
 
 export const LoginForm = () => {
   return (
-   <form action="" className="flex items-center flex-col gap-7 bg-white text-black pt-10 pb-10 pl-15 pr-15">
-    <Input placeholder="Username" id="username" ></Input>
-    <Input type='password' placeholder="Password" id='password'></Input>
-    <Button>Sign In</Button>
-    <Link href={"/activation"}>Activate Account</Link>
-    <Link href={"/registration"}>Parent Registration</Link>
-   </form>
+    <form
+      action=""
+      className="flex flex-col items-center gap-7 bg-white pt-10 pr-15 pb-10 pl-15 text-black"
+    >
+         <Image src={logo} alt='Logo' height={100} ></Image>
+      <Input placeholder="Username" id="username"></Input>
+      <Input type="password" placeholder="Password" id="password"></Input>
+      <Button>Sign In</Button>
+      <div className="flex flex-col text-center">
+        <Link href={"/activation"} className="font-bold">
+          Activate Account
+        </Link>
+        <Link href={"/registration"} className="font-bold">
+          Parent Registration
+        </Link>
+      </div>
+    </form>
   )
 }
