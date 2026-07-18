@@ -61,7 +61,7 @@ export const SignUpForm = () => {
       <Button className={"max-w-60 min-w-55"}>Sign Up</Button>
       <div className="flex flex-col ">
         <Link href={"/signin"} className="text-red-600">
-          <Button variant={"ghost"} className={"font-bold min-w-53"}>Sign In</Button>
+          <Button variant={"ghost"} className={"font-bold min-w-53"}>Back to Sign In</Button>
         </Link>
       </div>
     </form>

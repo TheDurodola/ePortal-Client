@@ -1,12 +1,16 @@
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import Link from 'next/link'
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import Link from "next/link"
+import { useState } from "react"
 
 const ActivationForm = () => {
+  const [dateText, setDateText] = useState<"text" | "date">("text")
   return (
     <form
       action=""
-      className="flex flex-col min-w-full items-center p-6 gap-6 text-black"
+      className="flex min-w-full flex-col items-center gap-6 p-6 text-black"
     >
       <Input
         placeholder="School Nō"
@@ -15,10 +19,16 @@ const ActivationForm = () => {
         required
       ></Input>
       <Input
-        type="date"
+        type={dateText}
         placeholder="Date of Birth"
+        onFocus={() => setDateText("date")}
+        onBlur={(e) => {
+          if (!e.target.value) {
+            setDateText("text")
+          }
+        }}
         id="password"
-        className="text-gray-400 border-b-gray-400"
+        className="border-b-gray-400 text-gray-400"
         required
       ></Input>
       <Input
@@ -28,7 +38,7 @@ const ActivationForm = () => {
         className="border-b-gray-400"
         required
       ></Input>
-       <Input
+      <Input
         type="password"
         placeholder="Confirm Password"
         id="password"
@@ -38,7 +48,9 @@ const ActivationForm = () => {
       <Button className={"max-w-60 min-w-55"}>Activate</Button>
       <div className="flex flex-col">
         <Link href={"/signin"} className="text-red-600">
-          <Button variant={"ghost"} className={"font-bold min-w-53"}>Sign In</Button>
+          <Button variant={"ghost"} className={"min-w-53 font-bold"}>
+            Back to Sign In
+          </Button>
         </Link>
       </div>
     </form>
