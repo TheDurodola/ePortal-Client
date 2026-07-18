@@ -9,21 +9,29 @@ export const LoginForm = () => {
   return (
     <form
       action=""
-      className="flex flex-col items-center gap-7 border-20 bg-white p-15 text-black"
+      className="flex flex-col min-w-full items-center p-6 gap-6 text-black"
     >
-      <Image src={logo} alt="Logo" height={100}></Image>
-      <Input placeholder="Username" id="username" className="w-full"></Input>
-      <Input type="password" placeholder="Password" id="password"></Input>
-      <Button>Sign In</Button>
+      <Input
+        placeholder="Username"
+        id="username"
+        className="border-b-gray-400"
+      ></Input>
+      <Input
+        type="password"
+        placeholder="Password"
+        id="password"
+        className="border-b-gray-400"
+      ></Input>
+      <Button className={"max-w-60 min-w-55"}>Sign In</Button>
       <div className="flex flex-col text-center">
-        <Link href={"/activation"} className="font-bold text-violet-800">
-          Activate Account
+        <Link href={"/activation"} className="text-red-600 border-b-2 border-b-black">
+          <Button variant={"ghost"} className={"font-bold min-w-53"}>Activate Account</Button>
         </Link>
-        <Link href={"/registration"} className="font-bold text-violet-800">
-          Parent Registration
+      
+        <Link href={"/registration"} className="text-red-600">
+          <Button variant={"ghost"} className={"font-bold"}>Parent Registration</Button>
         </Link>
       </div>
     </form>
-
   )
 }
