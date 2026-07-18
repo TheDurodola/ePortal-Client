@@ -1,3 +1,6 @@
+import Image from 'next/image'
+import backgrouncImage from "@/assets/campus2.jpg"
+
 export default function AuthLayout({
   children,
 }: {
