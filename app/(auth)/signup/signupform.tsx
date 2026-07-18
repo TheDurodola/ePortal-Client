@@ -1,24 +1,67 @@
-import React from 'react'
-import Image from 'next/image'
+
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import logo from "@/assets/school-logo.webp"
+
 
 
 export const SignUpForm = () => {
   return (
-    <form
+     <form
       action=""
-      className="flex flex-col items-center gap-7 border-20 bg-white p-15 text-black"
+      className="flex flex-col min-w-full overflow-y-scroll items-center p-6 gap-6 text-black"
     >
-      <Image src={logo} alt="Logo" height={100}></Image>
-      <Input placeholder="Username" id="username" className="w-full"></Input>
-      <Input type="password" placeholder="Password" id="password"></Input>
-      <Button>Sign Up</Button>
-      <div className="flex flex-col text-center">
-        <Link href={"/login"} className="font-bold text-violet-800">
-          Log IN
+      <Input
+        placeholder="Email"
+        id="email"
+        type='email'
+        className="border-b-gray-400"
+        required
+      ></Input>
+      <Input
+        placeholder="Firstname"
+        id="firstname"
+        className="text-gray-400 border-b-gray-400"
+        required
+      ></Input>
+       <Input
+        placeholder="Lastname"
+        id="lastname"
+        className="text-gray-400 border-b-gray-400"
+        required
+      ></Input>
+       <Input
+        type="date"
+        placeholder="Date of Birth"
+        id="password"
+        className="text-gray-400 border-b-gray-400"
+        required
+      ></Input>
+      <Input
+        type="password"
+        placeholder="Child's School Number"
+        id="password"
+        className="border-b-gray-400"
+        required
+      ></Input>
+      <Input
+        type="password"
+        placeholder="Password"
+        id="password"
+        className="border-b-gray-400"
+        required
+      ></Input>
+       <Input
+        type="password"
+        placeholder="Confirm Password"
+        id="password"
+        className="border-b-gray-400"
+        required
+      ></Input>
+      <Button className={"max-w-60 min-w-55"}>Sign Up</Button>
+      <div className="flex flex-col">
+        <Link href={"/signin"} className="text-red-600">
+          <Button variant={"ghost"} className={"font-bold min-w-53"}>Sign In</Button>
         </Link>
       </div>
     </form>
