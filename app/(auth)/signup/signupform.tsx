@@ -9,7 +9,7 @@ export const SignUpForm = () => {
   return (
      <form
       action=""
-      className="flex flex-col min-w-full overflow-y-scroll items-center p-6 gap-6 text-black"
+      className="flex flex-col min-w-full  items-center p-6 gap-6 text-black"
     >
       <Input
         placeholder="Email"
@@ -59,7 +59,7 @@ export const SignUpForm = () => {
         required
       ></Input>
       <Button className={"max-w-60 min-w-55"}>Sign Up</Button>
-      <div className="flex flex-col">
+      <div className="flex flex-col ">
         <Link href={"/signin"} className="text-red-600">
           <Button variant={"ghost"} className={"font-bold min-w-53"}>Sign In</Button>
         </Link>

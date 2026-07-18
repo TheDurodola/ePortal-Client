@@ -5,5 +5,5 @@ export default async function RootPage() {
     const cookieStore = await cookies();
     const isAuthenticated = cookieStore.has('session');
 
-    redirect(isAuthenticated ? '/dashboard' : '/login');
+    redirect(isAuthenticated ? '/dashboard' : '/signin');
 }
