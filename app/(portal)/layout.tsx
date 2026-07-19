@@ -7,10 +7,11 @@ export default function PortalLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex min-h-dvh items-center justify-center px-4 py-[max(env(safe-area-inset-top,0px),0rem)] pb-[max(env(safe-area-inset-bottom,0px),0rem)]">
+    <div className="flex min-h-dvh items-center justify-center px-4  bg-amber-200">
       <SidebarProvider>
         <AppSideBar/>
         <SidebarTrigger />
+        
         {children}
       </SidebarProvider>
     </div>
