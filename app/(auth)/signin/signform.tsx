@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
 import logo from "../../../assets/school-logo.webp"
 
@@ -26,10 +27,10 @@ export const SignInForm = () => {
       ></Input>
       <Button className={"max-w-60 min-w-55"}>Sign In</Button>
       <div className="flex flex-col">
-        <Link href={"/activation"} className="text-red-600 border-b-2 border-b-black">
+        <Link href={"/activation"} className="text-red-600">
           <Button variant={"ghost"} className={"font-bold min-w-53"}>Activate Account</Button>
         </Link>
-      
+    <Separator orientation="horizontal" className={"block min-h-1 bg-black"}/>
         <Link href={"/signup"} className="text-red-600">
           <Button variant={"ghost"} className={"font-bold"}>Parent Registration</Button>
         </Link>

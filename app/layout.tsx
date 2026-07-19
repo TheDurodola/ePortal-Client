@@ -56,7 +56,6 @@ export default function RootLayout({
           <TooltipProvider>{children}
              <ModeToggle />
           </TooltipProvider>
-          
         </ThemeProvider>
       </body>
     </html>
