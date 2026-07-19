@@ -32,7 +32,7 @@ export function AuthBackgroundSlideshow() {
   }, [prefersReducedMotion])
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-clip" aria-hidden="true">
+    <div className="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
       {SLIDES.map((slide, i) => (
         <Image
           key={slide.alt}
