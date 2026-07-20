@@ -52,9 +52,9 @@ export default function RootLayout({
       )}
     >
       <body suppressHydrationWarning>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <TooltipProvider>{children}
-             <ModeToggle />
+        <ThemeProvider  attribute="class" defaultTheme="system" enableSystem>
+          <TooltipProvider >{children}
+             <ModeToggle  />
           </TooltipProvider>
         </ThemeProvider>
       </body>

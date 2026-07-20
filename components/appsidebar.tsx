@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button"
 
 const AppSideBar = () => {
   return (
-    <Sidebar>
+    <Sidebar >
      <SidebarHeader className="text-center p-8 font-bold">God's Vision High School</SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -32,7 +32,6 @@ const AppSideBar = () => {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        {" "}
         <Button  variant={"destructive"} className={"bg-red-600 text-white"}>Log Out</Button>
       </SidebarFooter>
     </Sidebar>

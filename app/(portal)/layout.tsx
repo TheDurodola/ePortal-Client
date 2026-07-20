@@ -1,18 +1,21 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar"
+import { SidebarInset } from "@/components/ui/sidebar"
 import AppSideBar from "@/components/appsidebar"
+import { Header } from "./header"
 
 export default function PortalLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <div className="flex min-h-dvh items-center justify-center px-4 py-[max(env(safe-area-inset-top,0px),1rem)] pb-[max(env(safe-area-inset-bottom,0px),1rem)]">
-      <SidebarProvider>
-        <AppSideBar/>
-        <SidebarTrigger />
+  return (<div className="overflow-x-clip">
+    <SidebarProvider>
+      <AppSideBar />
+      <SidebarInset>
+        <Header />
         {children}
-      </SidebarProvider>
-    </div>
-  )
+      </SidebarInset>
+    </SidebarProvider>
+  
+  </div>)
 }
