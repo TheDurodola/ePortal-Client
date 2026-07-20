@@ -8,7 +8,7 @@ export default function PortalLayout({
 }: {
   children: React.ReactNode
 }) {
-  return (<div className="overflow-x-clip">
+  return (<div className="">
     <SidebarProvider>
       <AppSideBar />
       <SidebarInset>
