@@ -6,12 +6,12 @@ import { Separator } from "@/components/ui/separator"
 
 export function Header() {
   return (
-    <header className="relative min-w-dvw flex h-16 items-center border-b bg-white px-4">
+    <header className="relative min-w-dvw flex min-h-20 items-center border-b bg-white px-4">
       <div className="absolute left-4 top-1/2 -translate-y-1/2">
         <SidebarTrigger />
       </div>
       
-      {/* Your actual content stays perfectly aligned */}
+      
       <Image src={logo} alt="Logo" height={40} width={40} className="ml-40 lg:ml-160" />
     
     </header>
