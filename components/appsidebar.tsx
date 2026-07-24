@@ -32,7 +32,7 @@ const AppSideBar = () => {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <Button  variant={"destructive"} className={"bg-red-600 text-white"}>Log Out</Button>
+        <Button  variant={"destructive"} className={"bg-red-600 text-white"}>Sign Out</Button>
       </SidebarFooter>
     </Sidebar>
   )

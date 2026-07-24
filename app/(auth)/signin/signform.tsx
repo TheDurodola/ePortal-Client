@@ -4,13 +4,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { useActionState } from "react"
-import { signin, ActionState } from "@/lib/actions/auth"
+import { Signin, ActionState } from "@/lib/actions/auth"
 
 import Link from "next/link"
 
 export const SignInForm = () => {
   const [state, formAction, isPending] = useActionState<ActionState, FormData>(
-    signin,
+    Signin,
     {}
   )
   return (
