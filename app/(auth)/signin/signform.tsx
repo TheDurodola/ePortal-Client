@@ -9,9 +9,11 @@ import { Signin, ActionState } from "@/lib/actions/auth"
 import Link from "next/link"
 
 export const SignInForm = () => {
+
   const [state, formAction, isPending] = useActionState<ActionState, FormData>(
     Signin,
     {}
+  
   )
   return (
     <form
@@ -20,7 +22,7 @@ export const SignInForm = () => {
     >
       <Input
         name="username"
-        placeholder="School Nō / Email"
+        placeholder="School ID / Email"
         id="username"
         className="border-b-gray-400"
         required

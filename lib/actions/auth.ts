@@ -3,11 +3,13 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { SignInSchema, RegisterSchema } from "../validations/auth.schema"
+import { retrieveProfile } from "@/api/profile"
 
 export type ActionState = {
   error?: string
   success?: boolean
 }
+const SIX_HOURS_IN_SECONDS = 60 * 60 * 6;
 
 export async function authenticate(
   username: string,
@@ -33,12 +35,14 @@ export async function authenticate(
 
   let body: { jwt?: string; role?: string; expiresIn?: number }
   try {
-    body = await res.json()
+    console.log(res.status)
+    body = await res.json();
+    
   } catch {
     return { error: "Unexpected response from authentication server." }
   }
 
-  if (!body.jwt || !body.role) {
+  if (!body.jwt) {
     return { error: "Unexpected response from authentication server." }
   }
 
@@ -48,10 +52,10 @@ export async function authenticate(
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax" as const,
     path: "/",
-    maxAge: body.expiresIn ?? 3600,
+    maxAge: body.expiresIn ?? SIX_HOURS_IN_SECONDS,
   }
   cookieStore.set("session", body.jwt, cookieOpts)
-  cookieStore.set("role", body.role, cookieOpts)
+  cookieStore.set("role", body.role ?? "", cookieOpts)
 
   return { success: true }
 }
@@ -74,7 +78,10 @@ export async function Signin(
     validationResult.data.password
   )
 
-  if (result.success) redirect("/dashboard")
+  if (result.success) {
+    await retrieveProfile()
+    redirect("/dashboard")
+  }
   return result
 }
 
@@ -83,6 +90,7 @@ export async function SignOut(
     const cookieStore = await cookies()
     cookieStore.delete("session")
     cookieStore.delete("role")
+    redirect("/signin")
    }
 export async function ParentalRegistration(
   prevState: ActionState | undefined,

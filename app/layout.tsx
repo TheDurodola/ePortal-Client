@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { Metadata, Viewport } from "next"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { ModeToggle } from "@/components/mode-toggle"
+import Providers from './providers';
 
 const publicSansHeading = Public_Sans({
   subsets: ["latin"],
@@ -52,11 +53,13 @@ export default function RootLayout({
       )}
     >
       <body suppressHydrationWarning>
+        <Providers>
         <ThemeProvider  attribute="class" defaultTheme="system" enableSystem>
           <TooltipProvider >{children}
              <ModeToggle  />
           </TooltipProvider>
         </ThemeProvider>
+        </Providers>
       </body>
     </html>
   )

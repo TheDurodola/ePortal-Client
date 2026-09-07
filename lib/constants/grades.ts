@@ -1,0 +1,23 @@
+export const GRADES = {
+  NONE: "NONE",
+  CRECHE: "CRECHE",
+  PLAYGROUND: "PLAYGROUND",
+  KG1: "KG1",
+  KG2: "KG2",
+  NURSERY1: "NURSERY1",
+  NURSERY2: "NURSERY2",
+  PRIMARY1: "PRIMARY1",
+  PRIMARY2: "PRIMARY2",
+  PRIMARY3: "PRIMARY3",
+  PRIMARY4: "PRIMARY4",
+  PRIMARY5: "PRIMARY5",
+  PRIMARY6: "PRIMARY6",
+  JSS1: "JSS1",
+  JSS2: "JSS2",
+  JSS3: "JSS3",
+  SS1: "SS1",
+  SS2: "SS2",
+  SS3: "SS3",
+} as const;
+
+export type Grade = (typeof GRADES)[keyof typeof GRADES];

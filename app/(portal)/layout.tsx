@@ -3,13 +3,28 @@ import { SidebarInset } from "@/components/ui/sidebar"
 import AppSideBar from "@/components/appsidebar"
 import { Header } from "./header"
 import { Separator } from "@/components/ui/separator"
+import { retrieveProfile } from "@/api/profile"
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query"
 
-export default function PortalLayout({
+export default async function PortalLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+ const queryClient = new QueryClient()
+
+  await queryClient.query({
+    queryKey: ["profile"],
+    queryFn: retrieveProfile,
+    staleTime: 60 * 30 *1000, 
+  })
+
   return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
     <div className="max-w-dvw ">
       <SidebarProvider>
         <AppSideBar />
@@ -20,5 +35,6 @@ export default function PortalLayout({
         </SidebarInset>
       </SidebarProvider>
     </div>
+    </HydrationBoundary>
   )
 }
