@@ -11,6 +11,7 @@ import { StudentImportResult } from "@/api/import"
 export default function StudentTable({ data }: { data?: { students?: StudentImportResult[] } }) {
   const students = data?.students ?? [];
 
+  if(students.length==0)return <>No Data to load</>
   return (
     <>
       {students.length > 0 && (

@@ -9,7 +9,7 @@ export type ActionState = {
   error?: string
   success?: boolean
 }
-const SIX_HOURS_IN_SECONDS = 60 * 60 * 6;
+const SIX_HOURS_IN_SECONDS = 60 * 60 * 6
 
 export async function authenticate(
   username: string,
@@ -36,8 +36,7 @@ export async function authenticate(
   let body: { jwt?: string; role?: string; expiresIn?: number }
   try {
     console.log(res.status)
-    body = await res.json();
-    
+    body = await res.json()
   } catch {
     return { error: "Unexpected response from authentication server." }
   }
@@ -85,54 +84,59 @@ export async function Signin(
   return result
 }
 
-export async function SignOut(
-   ){
-    const cookieStore = await cookies()
-    cookieStore.delete("session")
-    cookieStore.delete("role")
-    redirect("/signin")
-   }
+export async function SignOut() {
+  const cookieStore = await cookies()
+  cookieStore.delete("session")
+  cookieStore.delete("role")
+  redirect("/signin")
+}
 export async function ParentalRegistration(
   prevState: ActionState | undefined,
   formData: FormData
 ): Promise<ActionState> {
   console.log("ParentalRegistration")
+  console.log("Parent birthdate " + formData.get("birthDate"))
+    console.log("Child birthdate" +formData.get("childBirthDate"))
   const validationResult = RegisterSchema.safeParse({
-    username: formData.get("username"),
-    password: formData.get("password"),
-    firstName: formData.get("firstName"),
-    birthDate: formData.get("birthDate"),
-    lastName: formData.get("lastName"),
-    childStudentNumber: formData.get("childStudentNumber"),
-    childBirthDate: formData.get("childBirthDate"),
-    confirmPassword: formData.get("confirmPassword"),
+    parent: {
+      username: formData.get("username"),
+      password: formData.get("password"),
+      firstName: formData.get("firstName"),
+      dateOfBirth: formData.get("dateOfBirth"),
+      lastName: formData.get("lastName"),
+      confirmPassword: formData.get("confirmPassword"),
+    },
+    child: {
+      childSchoolId: formData.get("childSchoolId"),
+      childDateOfBirth: formData.get("childDateOfBirth"),
+    },
   })
 
   if (!validationResult.success) {
-    console.log("ZOD ERROR:" + validationResult.error.issues)
+    console.log("ZOD ERROR:", validationResult.error.issues)
 
     return { error: validationResult.error.issues[0].message }
   }
 
-  const { username, birthDate, password, firstName, lastName } =
+  const { username, dateOfBirth, password, firstName, lastName } =
     validationResult.data.parent
-  const { childStudentNumber, childBirthDate } = validationResult.data.child
+  const { childSchoolId, childDateOfBirth } = validationResult.data.child
 
   let res: Response
   try {
     res = await fetch(
-      `${process.env.SPRING_BOOT_API_URL}/api/v1/auth/registration/parent`,
+      `${process.env.SPRING_BOOT_API_URL}/api/v1/auth/registration`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username,
           password,
-          birthDate,
+          dateOfBirth,
           firstName,
           lastName,
-          childStudentNumber,
-          childBirthDate,
+          childSchoolId,
+          childDateOfBirth,
         }),
       }
     )

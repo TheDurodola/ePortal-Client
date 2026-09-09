@@ -1,103 +1,116 @@
-import React from "react"
+"use client"
+
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { paySchoolFee, type SchoolFeesState, type SchoolPaymentState } from "@/api/schoolfees"
+import { useActionState } from "react"
 
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-]
+const initialState: SchoolPaymentState = {  error: undefined, redirectUrl: undefined }
 
-const SchoolFeesTable = () => {
+const SchoolFeesTable = ({ data }: { data: SchoolFeesState }) => {
+  const payloads = data.data ?? []
+
+  if (payloads.length === 0) {
+    return <div className="mt-5 text-sm text-muted-foreground">No fee records found.</div>
+  }
+
   return (
-    <div className="mt-5 border-2 border-amber-500 ">
-        <div className="mb-2">
-            <div>
-                Session:
-            </div>
-            <div>
-                Student Name:
-            </div>
-            <div>
-                Student No:
-            </div>
+    <div className="mt-5 border-2 border-amber-500">
+      {payloads.map((payload) => {
+        const tuition = Number(payload.tuition)
+        const total = Number(payload.total)
+        const totalPaid = Number(payload.totalPaid)
+        const balance = total - totalPaid
 
-        </div>
+        return (
+          <FeeRow
+            key={payload.studentID}
+            payload={payload}
+            tuition={tuition}
+            balance={balance}
+          />
+        )
+      })}
+    </div>
+  )
+}
+
+const FeeRow = ({
+  payload,
+  tuition,
+  balance,
+}: {
+  payload: NonNullable<SchoolFeesState["data"]>[number];
+  tuition: number
+  balance: number
+}) => {
+  const [state, formAction, isPending] = useActionState(paySchoolFee, initialState)
+
+  return (
+    <div className="border-b pb-4 mb-4">
+      <div>Session: {payload.session}</div>
+      <div>Student Name: {payload.studentLastName} {payload.studentFirstName}</div>
+      <div>Student ID: {payload.studentID}</div>
+      <div>Grade: {payload.grade}</div>
+      <div>Department: {payload.department}</div>
+
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-20 font-black">S/N</TableHead>
             <TableHead>Description</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead>Amount</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right">
-                {invoice.totalAmount}
-              </TableCell>
-            </TableRow>
-          ))}
+          <TableRow>
+            <TableCell>Tuition</TableCell>
+            <TableCell>{tuition}</TableCell>
+          </TableRow>
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
+            <TableCell>Balance</TableCell>
+            <TableCell>{balance}</TableCell>
           </TableRow>
         </TableFooter>
       </Table>
-      <Button className={"bg-green-600 mt-3 " }>Pay Now</Button>
+
+      <form action={formAction} className="flex items-center gap-3 pt-2">
+        <input type="hidden" name="schoolId" value={payload.studentID} />
+        <div className="w-48">
+          <label htmlFor={`amount-${payload.studentID}`} className="sr-only">
+            Amount to pay
+          </label>
+          <Input
+            id={`amount-${payload.studentID}`}
+            name="amount"
+            type="number"
+            min="1"
+            max={balance > 0 ? balance : undefined}
+            placeholder="Enter amount"
+          />
+        </div>
+        <Button
+          type="submit"
+          disabled={isPending || balance <= 0}
+          className="bg-green-600 hover:bg-green-700"
+        >
+          {isPending ? "Processing..." : "Pay Now"}
+        </Button>
+      </form>
+
+      {state.error && (
+        <p className="text-sm text-red-600 mt-1">{state.error}</p>
+      )}
     </div>
   )
 }

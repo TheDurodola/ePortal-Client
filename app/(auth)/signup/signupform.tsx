@@ -48,15 +48,15 @@ export const SignUpForm = () => {
             setDateText("text")
           }
         }}
-        id="birthDate"
-        name="birthDate"
+        id="dateOfBirth"
+        name="dateOfBirth"
         className="border-b-gray-400 text-gray-400"
         required
       ></Input>
       <Input
-        name="childStudentNumber"
+        name="childSchoolId"
         placeholder="Child's School Nō"
-        id="childStudentNumber"
+        id="childSchoolId"
         className="border-b-gray-400"
         required
       ></Input>
@@ -69,8 +69,8 @@ export const SignUpForm = () => {
             setDateText("text")
           }
         }}
-        name="childBirthDate"
-        id="childBirthDate"
+        name="childDateOfBirth"
+        id="childDateOfBirth"
         className="border-b-gray-400 text-gray-400"
         required
       ></Input>

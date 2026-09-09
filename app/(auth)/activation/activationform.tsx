@@ -35,8 +35,8 @@ const ActivationForm = () => {
             setDateText("text")
           }
         }}
-        id="birthDate"
-        name="birthDate"
+        id="dateOfBirth"
+        name="dateOfBirth"
         className="border-b-gray-400 text-gray-400"
         required
       ></Input>

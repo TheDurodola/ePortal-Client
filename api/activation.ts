@@ -12,7 +12,7 @@ export async function AccountActivation(
   const validationResult = ActivationSchema.safeParse({
     username: formData.get("username"),
     password: formData.get("password"),
-    birthDate: formData.get("birthDate"),
+    dateOfBirth: formData.get("dateOfBirth"),
     confirmPassword: formData.get("confirmPassword"),
   })
 
@@ -20,19 +20,18 @@ export async function AccountActivation(
     return { error: validationResult.error.issues[0].message }
   }
 
-  const { username, birthDate, password } = validationResult.data
-
+  const { username, dateOfBirth, password } = validationResult.data
   let res: Response
   try {
     res = await fetch(
-      `${process.env.SPRING_BOOT_API_URL}/api/v1/auth/activation`,
+      `${process.env.SPRING_BOOT_API_URL}/api/v1/preregistration/activation`,
       {
-        method: "PUT",
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username,
           password,
-          birthDate,
+          dateOfBirth,
         }),
       }
     )

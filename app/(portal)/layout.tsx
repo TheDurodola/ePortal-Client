@@ -4,6 +4,7 @@ import AppSideBar from "@/components/appsidebar"
 import { Header } from "./header"
 import { Separator } from "@/components/ui/separator"
 import { retrieveProfile } from "@/api/profile"
+import { getSchoolFeesDetails } from "@/api/schoolfees"
 import {
   dehydrate,
   HydrationBoundary,
@@ -20,6 +21,12 @@ export default async function PortalLayout({
   await queryClient.query({
     queryKey: ["profile"],
     queryFn: retrieveProfile,
+    staleTime: 60 * 30 *1000, 
+  })
+
+   await queryClient.query({
+    queryKey: ["schoolfeesparent"],
+    queryFn: getSchoolFeesDetails,
     staleTime: 60 * 30 *1000, 
   })
 
